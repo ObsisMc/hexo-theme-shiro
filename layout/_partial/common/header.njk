@@ -15,7 +15,7 @@
                 {% endif %}
             </div>
             <p class="site-subtitle">
-                {{ config.subtitle | default("以夜為箋，寄心成簡。", true) }}
+                {{ config.subtitle | default("以夜為箋，寄心成簡。123", true) }}
             </p>
             {% if theme.site.rss.enabled %}
             <div class="mt-3 sm:mt-4 flex justify-center">
@@ -24,6 +24,13 @@
                     {{ ui.icon_rss() }}
                     <span>RSS</span>
                 </a>
+                {% if theme.site.github.enabled %}
+                <a class="group inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-slate-200/80 bg-slate-50/50 text-xs tracking-wide text-slate-500 hover:bg-white hover:text-slate-800 hover:border-slate-300 hover:shadow-xs transition-all duration-300 ml-2"
+                    href="{{ theme.site.github }}" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                    {{ ui.icon_github() }}
+                    <span>GitHub</span>
+                </a>
+                {% endif %}
             </div>
             {% endif %}
         </div>

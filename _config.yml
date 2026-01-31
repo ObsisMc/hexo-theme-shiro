@@ -2,16 +2,14 @@
 menu:
 #  - name: Home
 #    url: /
-#  - name: Archives
-#    url: /archives
+  - name: Archives
+    url: /archives
 #  - name: Categories
 #    url: /categories
-#  - name: Tags
-#    url: /tags
-#  - name: About
-#    url: /about
-#  - name: GitHub
-#    url: https://github.com
+  - name: Tags
+    url: /tags
+  - name: About
+    url: /about
 #    # Open in new tab
 #    target: _blank
 
@@ -20,8 +18,11 @@ site:
   # Whether to display the seal (stamp) in the header
   seal: true
   rss:
-    enabled: false
+    enabled: true
     path: /atom.xml
+  github:
+    enabled: true
+    url: https://github.com/ObsisMc
 
 # Analytics
 analytics:
@@ -39,8 +40,6 @@ comments:
 
 # Excerpt settings
 excerpt:
-  # If post has <!-- more -->, use it.
-  # Otherwise fallback to auto-truncated excerpt.
   fallback:
     enabled: true
     length: 200

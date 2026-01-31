@@ -13,7 +13,7 @@
 </svg>
 {% endmacro %}
 
-{% macro seal(title="白") %}
+{% macro seal(title="睿") %}
 <svg width="52" height="52" viewBox="0 0 100 100" aria-label="朱印：{{ title }}" title="朱印：{{ title }}"
     xmlns="http://www.w3.org/2000/svg">
     <path d="M15,12 Q50,5 85,12 Q95,50 88,88 Q50,95 12,88 Q5,50 15,12 Z"
@@ -57,11 +57,17 @@
 </svg>
 {% endmacro %}
 
-{% macro icon_rss(class="w-3 h-3 group-hover:text-orange-500 transition-colors duration-300") %}
-<svg class="{{ class }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+{% macro icon_rss(class="w-6 h-6 group-hover:text-orange-500 transition-colors duration-300") %}
+<svg class="{{ class }}" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
     <path d="M4 11a9 9 0 0 1 9 9"></path>
     <path d="M4 4a16 16 0 0 1 16 16"></path>
     <circle cx="5" cy="19" r="1"></circle>
+</svg>
+{% endmacro %}
+
+{% macro icon_github(class="w-6 h-6 group-hover:text-slate-800 transition-colors duration-300") %}
+<svg class="{{ class }}" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M12 .5C5.73.5.78 5.45.78 11.72c0 4.85 3.14 8.96 7.5 10.42.55.1.75-.24.75-.53 0-.26-.01-1.12-.02-2.03-3.05.66-3.7-1.47-3.7-1.47-.5-1.27-1.22-1.61-1.22-1.61-.99-.68.08-.67.08-.67 1.1.08 1.68 1.13 1.68 1.13.97 1.66 2.55 1.18 3.17.9.1-.7.38-1.18.69-1.45-2.43-.28-4.99-1.22-4.99-5.44 0-1.2.43-2.18 1.13-2.95-.11-.28-.49-1.4.11-2.92 0 0 .91-.29 2.98 1.12.86-.24 1.78-.36 2.7-.36.91 0 1.84.12 2.7.36 2.07-1.41 2.98-1.12 2.98-1.12.6 1.52.22 2.64.11 2.92.7.77 1.13 1.75 1.13 2.95 0 4.23-2.57 5.16-5.02 5.43.39.34.73 1.02.73 2.06 0 1.49-.01 2.69-.01 3.06 0 .29.2.64.76.53 4.36-1.46 7.5-5.57 7.5-10.42C23.22 5.45 18.27.5 12 .5z" />
 </svg>
 {% endmacro %}
 
