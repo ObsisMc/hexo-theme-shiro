@@ -12,6 +12,16 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.8.3/css/lightgallery.min.css">
     <link rel="stylesheet" href="{{ url_for('css/style.min.css') }}">
 
+    <!-- Inline override: increase prose width only on post pages so posts/code can use more horizontal space without rebuilding CSS -->
+    {% if is_post() %}
+    <style>
+        /* Make article prose wider (override compiled CSS) only on post pages */
+        .prose-shiro { max-width: 85ch !important; }
+        /* For very wide code blocks inside highlight, allow horizontal scrolling if still too long */
+        .prose-shiro .highlight { overflow-x: auto; }
+    </style>
+    {% endif %}
+
     <!-- Analytics -->
     {% include "../analytics/google.njk" %}
 </head>
