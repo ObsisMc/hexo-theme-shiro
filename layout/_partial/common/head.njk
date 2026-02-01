@@ -10,6 +10,9 @@
 
     <!-- CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.8.3/css/lightgallery.min.css">
+    {% if config.syntax_highlighter == "highlight.js" %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    {% endif %}
     <link rel="stylesheet" href="{{ url_for('css/style.min.css') }}">
 
     <!-- Inline override: increase prose width only on post pages so posts/code can use more horizontal space without rebuilding CSS -->
@@ -19,6 +22,52 @@
         .prose-shiro { max-width: 85ch !important; }
         /* For very wide code blocks inside highlight, allow horizontal scrolling if still too long */
         .prose-shiro .highlight { overflow-x: auto; }
+        /* Override highlight.js theme background to match shiro code block tone */
+        .prose-shiro .highlight,
+        .prose-shiro pre,
+        .prose-shiro pre code,
+        .prose-shiro .hljs { background: var(--color-slate-100) !important; }
+        /* Code block copy button */
+        .prose-shiro .highlight { position: relative; }
+        .prose-shiro .code-copy-btn {
+            position: absolute;
+            top: 0.6rem;
+            right: 0.6rem;
+            border-radius: 0.5rem;
+            border: 1px solid var(--color-slate-300);
+            background: #ffffffcc;
+            color: var(--color-slate-700);
+            width: 1.75rem;
+            height: 1.75rem;
+            padding: 0;
+            cursor: pointer;
+            backdrop-filter: blur(4px);
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+        }
+        .prose-shiro .highlight:hover .code-copy-btn {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .prose-shiro .code-copy-btn svg {
+            width: 1rem;
+            height: 1rem;
+            fill: currentColor;
+        }
+        .prose-shiro .code-copy-btn:hover {
+            background: var(--color-slate-800);
+            color: #fff;
+            border-color: var(--color-slate-800);
+        }
+        .prose-shiro .code-copy-btn[data-copied="true"] {
+            background: var(--color-slate-900);
+            color: #fff;
+            border-color: var(--color-slate-900);
+        }
     </style>
     {% endif %}
 

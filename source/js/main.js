@@ -29,4 +29,58 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+
+    // Code block copy buttons (posts only)
+    const codeBlocks = document.querySelectorAll('.prose-shiro .highlight');
+    if (codeBlocks.length > 0) {
+        codeBlocks.forEach((block) => {
+            if (block.querySelector('.code-copy-btn')) return;
+
+            const button = document.createElement('button');
+            button.type = 'button';
+            button.className = 'code-copy-btn';
+            button.setAttribute('aria-label', 'Copy code');
+            const copyIcon = '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M16 1H6a2 2 0 0 0-2 2v10h2V3h10V1zm3 4H10a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zm0 16H10V7h9v14z"/></svg>';
+            const checkIcon = '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>';
+            button.innerHTML = copyIcon;
+
+            const getCodeText = () => {
+                const tableCode = block.querySelector('td.code pre');
+                if (tableCode) return tableCode.textContent;
+                const preCode = block.querySelector('pre code');
+                if (preCode) return preCode.textContent;
+                const pre = block.querySelector('pre');
+                return pre ? pre.textContent : '';
+            };
+
+
+            button.addEventListener('click', async () => {
+                const text = getCodeText();
+                if (!text) return;
+
+                try {
+                    await navigator.clipboard.writeText(text);
+                } catch (err) {
+                    const helper = document.createElement('textarea');
+                    helper.value = text;
+                    helper.setAttribute('readonly', '');
+                    helper.style.position = 'absolute';
+                    helper.style.left = '-9999px';
+                    document.body.appendChild(helper);
+                    helper.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(helper);
+                }
+
+                button.dataset.copied = 'true';
+                button.innerHTML = checkIcon;
+                window.setTimeout(() => {
+                    button.dataset.copied = 'false';
+                    button.innerHTML = copyIcon;
+                }, 1400);
+            });
+
+            block.appendChild(button);
+        });
+    }
 });
