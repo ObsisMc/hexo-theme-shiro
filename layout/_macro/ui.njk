@@ -13,7 +13,7 @@
 </svg>
 {% endmacro %}
 
-{% macro seal(title="睿") %}
+{% macro seal(title="豪") %}
 <svg width="52" height="52" viewBox="0 0 100 100" aria-label="朱印：{{ title }}" title="朱印：{{ title }}"
     xmlns="http://www.w3.org/2000/svg">
     <path d="M15,12 Q50,5 85,12 Q95,50 88,88 Q50,95 12,88 Q5,50 15,12 Z"
@@ -69,6 +69,19 @@
 <svg class="{{ class }}" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
     <path fill-rule="evenodd" clip-rule="evenodd" d="M12 .5C5.73.5.78 5.45.78 11.72c0 4.85 3.14 8.96 7.5 10.42.55.1.75-.24.75-.53 0-.26-.01-1.12-.02-2.03-3.05.66-3.7-1.47-3.7-1.47-.5-1.27-1.22-1.61-1.22-1.61-.99-.68.08-.67.08-.67 1.1.08 1.68 1.13 1.68 1.13.97 1.66 2.55 1.18 3.17.9.1-.7.38-1.18.69-1.45-2.43-.28-4.99-1.22-4.99-5.44 0-1.2.43-2.18 1.13-2.95-.11-.28-.49-1.4.11-2.92 0 0 .91-.29 2.98 1.12.86-.24 1.78-.36 2.7-.36.91 0 1.84.12 2.7.36 2.07-1.41 2.98-1.12 2.98-1.12.6 1.52.22 2.64.11 2.92.7.77 1.13 1.75 1.13 2.95 0 4.23-2.57 5.16-5.02 5.43.39.34.73 1.02.73 2.06 0 1.49-.01 2.69-.01 3.06 0 .29.2.64.76.53 4.36-1.46 7.5-5.57 7.5-10.42C23.22 5.45 18.27.5 12 .5z" />
 </svg>
+{% endmacro %}
+
+{% macro icon_linkedin(class="w-4 h-4 group-hover:text-slate-800 transition-colors duration-300") %}
+<svg class="{{ class }}" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+    <path d="M22.23 0H1.77C.79 0 0 .774 0 1.727v20.545C0 23.227.79 24 1.77 24h20.46C23.2 24 24 23.227 24 22.273V1.727C24 .774 23.2 0 22.23 0zM7.09 20.452H3.56V9h3.53v11.452zM5.32 7.433c-1.13 0-2.05-.926-2.05-2.065 0-1.14.92-2.065 2.05-2.065 1.13 0 2.05.925 2.05 2.065 0 1.139-.92 2.065-2.05 2.065zM20.45 20.452h-3.53v-5.569c0-1.328-.03-3.037-1.85-3.037-1.85 0-2.13 1.445-2.13 2.94v5.666h-3.53V9h3.39v1.561h.05c.47-.9 1.62-1.85 3.34-1.85 3.57 0 4.22 2.35 4.22 5.41v6.33z" />
+</svg>
+{% endmacro %}
+
+{% macro social_icon(href, label, icon, class="") %}
+<a class="social-icon group inline-flex items-center justify-center rounded-full text-slate-500 hover:text-slate-800 transition-colors duration-300 {{ class }}"
+    href="{{ href }}" target="_blank" rel="noopener" aria-label="{{ label }}">
+    {{ icon }}
+</a>
 {% endmacro %}
 
 {% macro icon_empty(class="h-10 w-10 mx-auto opacity-30") %}

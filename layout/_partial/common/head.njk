@@ -71,6 +71,73 @@
     </style>
     {% endif %}
 
+    {% if page.layout == "about" %}
+    <style>
+        .about-simple { text-align: center; }
+        .about-simple .about-avatar {
+            width: 9rem;
+            height: 9rem;
+            margin: 0 auto;
+        }
+        .about-simple .about-avatar img {
+            width: 100%;
+            height: 100%;
+            display: block;
+            border-radius: 999px;
+            object-fit: cover;
+        }
+        .about-simple .about-names { margin-top: 1.25rem; }
+        .about-simple .about-name-primary {
+            font-family: var(--font-title);
+            font-size: 1.5rem;
+            line-height: 1.25;
+            color: var(--color-slate-900);
+        }
+        .about-simple .about-name-secondary {
+            margin-top: 0.25rem;
+            font-size: 1.05rem;
+            letter-spacing: 0.08em;
+            color: var(--color-slate-500);
+        }
+        .about-simple .about-slogan {
+            margin-top: 1.25rem;
+            color: var(--color-slate-700);
+            letter-spacing: 0.08em;
+            font-weight: 500;
+        }
+        .about-simple .about-slogan.font-yuji-boku {
+            font-family: "Yuji Boku","Yuji Syuku","Zen Old Mincho","Noto Serif JP",serif;
+        }
+        .about-simple .about-slogan.font-yuji-syuku {
+            font-family: "Yuji Syuku","Yuji Boku","Zen Old Mincho","Noto Serif JP",serif;
+        }
+        .about-simple .about-social {
+            margin-top: 1rem;
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        .about-simple .social-icon {
+            width: 28px;
+            height: 28px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 999px;
+            line-height: 1;
+        }
+        .about-simple .social-icon svg {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+        .about-simple .social-linkedin:hover {
+            color: #0a66c2;
+        }
+    </style>
+    {% endif %}
+
     <!-- Analytics -->
     {% include "../analytics/google.njk" %}
 </head>

@@ -1,0 +1,41 @@
+{% extends "_layout.njk" %}
+{% import "_macro/ui.njk" as ui %}
+
+{% block content %}
+{% set about = theme.about or {} %}
+{% set display_name = about.name or config.author or "Your Name" %}
+{% set alias_name = about.alias or "" %}
+{% set avatar = about.avatar or theme.site.favicon or "/favicon.svg" %}
+{% set slogan_font = about.slogan_font or "yuji-boku" %}
+
+<article class="content-article about-simple">
+    <section class="section-shell">
+        <div class="text-center">
+            <div class="about-avatar">
+                <img src="{{ url_for(avatar) }}" alt="{{ display_name }}">
+            </div>
+            <div class="about-names">
+                <div class="about-name-primary">{{ display_name }}</div>
+                {% if alias_name %}
+                <div class="about-name-secondary">{{ alias_name }}</div>
+                {% endif %}
+            </div>
+            {% if about.tagline %}
+            <p class="about-slogan font-{{ slogan_font }} text-base sm:text-lg text-slate-400 font-title">{{ about.tagline }}</p>
+            {% endif %}
+
+            <div class="about-social text-sm">
+                {% if about.social.github %}
+                {{ ui.social_icon(about.social.github, "GitHub", ui.icon_github("w-5 h-5")) }}
+                {% endif %}
+                {% if about.social.linkedin %}
+                {{ ui.social_icon(about.social.linkedin, "LinkedIn", ui.icon_linkedin("w-5 h-5"), "social-linkedin") }}
+                {% endif %}
+                {% if about.rss %}
+                {{ ui.social_icon(about.rss, "RSS", ui.icon_rss("w-5 h-5")) }}
+                {% endif %}
+            </div>
+        </div>
+    </section>
+</article>
+{% endblock %}

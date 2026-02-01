@@ -1,17 +1,30 @@
 # Navigation menu
 menu:
-#  - name: Home
-#    url: /
+  - name: Home
+    url: /
   - name: Archives
     url: /archives
-#  - name: Categories
-#    url: /categories
+  - name: Categories
+    url: /categories
   - name: Tags
     url: /tags
   - name: About
     url: /about
 #    # Open in new tab
 #    target: _blank
+
+# About page profile
+about:
+  # Replace with your own avatar image placed in themes/shiro/source/images or site source/images
+  avatar: /favicon.svg
+  name: " 张睿豪"
+  alias: "Ruihao (Ray) Zhang"
+  tagline: "Systems, Data, Code, and Ideas"
+  slogan_font: yuji-boku # yuji-boku or yuji-syuku
+  social:
+      email: ""
+      github: "https://github.com/ObsisMc"
+      linkedin: "https://www.linkedin.com/in/ruihao-zhang/"
 
 site:
   favicon: /favicon.svg
