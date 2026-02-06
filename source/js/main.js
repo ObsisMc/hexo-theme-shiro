@@ -83,4 +83,45 @@ document.addEventListener('DOMContentLoaded', () => {
             block.appendChild(button);
         });
     }
+
+    // To top button: show only when the main divider is out of view
+    const toTopBtn = document.getElementById('toTopBtn');
+    const divider = document.getElementById('dividerSentinel') || document.querySelector('main.section-divider');
+    if (toTopBtn && divider) {
+        const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        const showBtn = (show) => {
+            toTopBtn.classList.toggle('is-visible', show);
+        };
+
+        const updateByScroll = () => {
+            const dividerTop = divider.getBoundingClientRect().top + window.scrollY;
+            showBtn(window.scrollY > dividerTop);
+        };
+
+        if ('IntersectionObserver' in window) {
+            const observer = new IntersectionObserver(
+                (entries) => {
+                    const entry = entries[0];
+                    const passed = entry.boundingClientRect.top < 0;
+                    showBtn(!entry.isIntersecting && passed);
+                },
+                { root: null, threshold: 0 }
+            );
+
+            observer.observe(divider);
+        } else {
+            updateByScroll();
+            window.addEventListener('scroll', updateByScroll, { passive: true });
+            window.addEventListener('resize', updateByScroll);
+        }
+
+        toTopBtn.addEventListener('click', () => {
+            if (prefersReduced) {
+                window.scrollTo(0, 0);
+            } else {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        });
+    }
 });

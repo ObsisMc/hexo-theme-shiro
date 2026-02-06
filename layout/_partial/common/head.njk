@@ -15,6 +15,69 @@
     {% endif %}
     <link rel="stylesheet" href="{{ url_for('css/style.min.css') }}">
 
+    <style>
+        .section-divider-sentinel {
+            height: 1px;
+            margin-top: -1px;
+            pointer-events: none;
+        }
+        .to-top-btn {
+            position: fixed;
+            right: 1.4rem;
+            bottom: 1.6rem;
+            width: 2.6rem;
+            height: 2.6rem;
+            border-radius: 999px;
+            border: 1px solid rgba(148, 163, 184, 0.35);
+            background: rgba(255, 255, 255, 0.9);
+            color: #1f2937;
+            font-size: 1.1rem;
+            line-height: 1;
+            box-shadow: 0 8px 20px rgba(15, 23, 42, 0.12);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(8px);
+            transition: opacity 0.2s ease, transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+            z-index: 40;
+        }
+        .to-top-btn svg {
+            width: 1.2rem;
+            height: 1.2rem;
+            fill: currentColor;
+        }
+        .to-top-btn:hover {
+            background: #0f172a;
+            color: #fff;
+            border-color: #0f172a;
+        }
+        .to-top-btn.is-visible {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateY(0);
+        }
+        @media (max-width: 640px) {
+            .to-top-btn {
+                right: 0.9rem;
+                bottom: 1rem;
+                width: 2.3rem;
+                height: 2.3rem;
+            }
+        }
+        @media (max-width: 480px) {
+            .to-top-btn {
+                display: none;
+            }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .to-top-btn {
+                transition: none;
+            }
+        }
+    </style>
+
     <!-- Inline override: increase prose width only on post pages so posts/code can use more horizontal space without rebuilding CSS -->
     {% if is_post() %}
     <style>
