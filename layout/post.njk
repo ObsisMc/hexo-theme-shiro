@@ -1,5 +1,6 @@
 {% extends "_layout.njk" %}
 {% from "_macro/ui.njk" import meta, render_tag with context %}
+{% set toc_html = toc(page.content) %}
 
 {% block content %}
 <article class="content-article">
@@ -44,4 +45,25 @@
 
     {% include "_partial/comments/giscus.njk" %}
 </article>
+{% endblock %}
+
+{% block post_toc %}
+{% if toc_html %}
+<aside class="post-toc-float" aria-label="目录">
+    <div class="post-toc" data-collapsed="true" data-pinned="false">
+        <button class="post-toc-toggle" type="button" aria-expanded="false">
+            <span class="post-toc-bookmark" aria-hidden="true">
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <path d="M7.25 6.5a1 1 0 1 1-2 0a1 1 0 0 1 2 0zm0 5a1 1 0 1 1-2 0a1 1 0 0 1 2 0zm0 5a1 1 0 1 1-2 0a1 1 0 0 1 2 0zM10 6.5h9M10 11.5h9M10 16.5h9" />
+                </svg>
+            </span>
+            <span class="post-toc-title">目录</span>
+            <span class="post-toc-toggle-icon" aria-hidden="true"></span>
+        </button>
+        <div class="post-toc-body">
+            {{ toc_html | safe }}
+        </div>
+    </div>
+</aside>
+{% endif %}
 {% endblock %}

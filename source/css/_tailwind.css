@@ -220,6 +220,38 @@
         @apply line-clamp-1 underline-offset-4 decoration-slate-300 group-hover:underline;
     }
 
+    .post-toc {
+        @apply rounded-2xl border border-slate-100 bg-white/80 px-5 py-4 text-sm text-slate-600 shadow-sm;
+    }
+
+    .post-toc-title {
+        @apply mb-3 font-title text-xs text-slate-400 tracking-note;
+    }
+
+    .post-toc .toc {
+        @apply m-0 list-none pl-0;
+    }
+
+    .post-toc .toc-item + .toc-item {
+        @apply mt-2;
+    }
+
+    .post-toc .toc-child {
+        @apply mt-2 ml-4 border-l border-slate-200/70 pl-4;
+    }
+
+    .post-toc .toc-link {
+        @apply flex items-baseline gap-2 text-slate-600 transition-colors hover:text-slate-900;
+    }
+
+    .post-toc .toc-number {
+        @apply text-xs text-slate-400 tabular-nums;
+    }
+
+    .post-toc .toc-text {
+        @apply text-sm;
+    }
+
     @media (min-width: 640px) {
         .site-title {
             font-size: 2.55rem;

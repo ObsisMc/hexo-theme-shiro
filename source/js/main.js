@@ -84,6 +84,120 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Post TOC: collapse + active heading highlight
+    const tocBlocks = document.querySelectorAll('.post-toc');
+    if (tocBlocks.length > 0) {
+        tocBlocks.forEach((toc) => {
+            const toggle = toc.querySelector('.post-toc-toggle');
+            const body = toc.querySelector('.post-toc-body');
+            if (!toggle || !body) return;
+
+            const setPinned = (pinned) => {
+                toc.dataset.pinned = pinned ? 'true' : 'false';
+            };
+
+            const setCollapsed = (collapsed) => {
+                toc.dataset.collapsed = collapsed ? 'true' : 'false';
+                toggle.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
+                body.hidden = collapsed;
+            };
+
+            const initialCollapsed = toc.dataset.collapsed !== 'false';
+            const initialPinned = toc.dataset.pinned === 'true';
+            setCollapsed(initialCollapsed);
+            setPinned(initialPinned);
+
+            toggle.addEventListener('click', () => {
+                const isPinned = toc.dataset.pinned === 'true';
+                if (isPinned) {
+                    setPinned(false);
+                    setCollapsed(true);
+                } else {
+                    setPinned(true);
+                    setCollapsed(false);
+                }
+            });
+        });
+
+        const tocLinks = Array.from(document.querySelectorAll('.post-toc .toc-link'));
+        if (tocLinks.length > 0) {
+            const linkMap = new Map();
+            tocLinks.forEach((link) => {
+                const href = link.getAttribute('href') || '';
+                const id = decodeURIComponent(href).replace(/^#/, '');
+                if (!id) return;
+                if (!linkMap.has(id)) linkMap.set(id, []);
+                linkMap.get(id).push(link);
+            });
+
+            const headings = Array.from(
+                document.querySelectorAll('.prose-shiro h2, .prose-shiro h3, .prose-shiro h4')
+            ).filter((heading) => heading.id && linkMap.has(heading.id));
+
+            let activeId = null;
+            const ensureVisible = (container, element) => {
+                if (!container || !element) return;
+                const containerRect = container.getBoundingClientRect();
+                const elementRect = element.getBoundingClientRect();
+                const padding = 8;
+
+                if (elementRect.top < containerRect.top + padding) {
+                    container.scrollTop -= (containerRect.top + padding - elementRect.top);
+                } else if (elementRect.bottom > containerRect.bottom - padding) {
+                    container.scrollTop += (elementRect.bottom - (containerRect.bottom - padding));
+                }
+            };
+
+            const setActive = (id) => {
+                if (!id || id === activeId) return;
+                activeId = id;
+                tocLinks.forEach((link) => {
+                    const linkId = decodeURIComponent(link.getAttribute('href') || '').replace(/^#/, '');
+                    link.classList.toggle('is-active', linkId === id);
+                });
+
+                const activeLinks = linkMap.get(id) || [];
+                activeLinks.forEach((link) => {
+                    const container = link.closest('.post-toc-body');
+                    ensureVisible(container, link);
+                });
+            };
+
+            const updateActiveByScroll = () => {
+                if (headings.length === 0) return;
+                const offset = 120;
+                let current = null;
+
+                for (const heading of headings) {
+                    const top = heading.getBoundingClientRect().top;
+                    if (top - offset <= 0) {
+                        current = heading;
+                    } else {
+                        break;
+                    }
+                }
+
+                if (!current) current = headings[0];
+                setActive(current.id);
+            };
+
+            let ticking = false;
+            const onScroll = () => {
+                if (ticking) return;
+                ticking = true;
+                window.requestAnimationFrame(() => {
+                    updateActiveByScroll();
+                    ticking = false;
+                });
+            };
+
+            updateActiveByScroll();
+            window.setTimeout(updateActiveByScroll, 200);
+            window.addEventListener('scroll', onScroll, { passive: true });
+            window.addEventListener('resize', onScroll);
+        }
+    }
+
     // To top button: show only when the main divider is out of view
     const toTopBtn = document.getElementById('toTopBtn');
     const divider = document.getElementById('dividerSentinel') || document.querySelector('main.section-divider');
