@@ -77,6 +77,15 @@
 </svg>
 {% endmacro %}
 
+{% macro icon_medium(class="w-4 h-4 group-hover:text-slate-800 transition-colors duration-300") %}
+<svg class="{{ class }}" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+    <circle cx="12" cy="12" r="11" fill="currentColor" />
+    <ellipse cx="8.2" cy="12" rx="3.2" ry="5.2" fill="#ffffff" />
+    <ellipse cx="13.6" cy="12" rx="2.2" ry="4.3" fill="#ffffff" />
+    <rect x="16.8" y="7.9" width="2" height="8.2" rx="1" fill="#ffffff" />
+</svg>
+{% endmacro %}
+
 {% macro social_icon(href, label, icon, class="") %}
 <a class="social-icon group inline-flex items-center justify-center rounded-full text-slate-500 hover:text-slate-800 transition-colors duration-300 {{ class }}"
     href="{{ href }}" target="_blank" rel="noopener" aria-label="{{ label }}">

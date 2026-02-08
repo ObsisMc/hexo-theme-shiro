@@ -31,6 +31,9 @@
                 {% if about.social.linkedin %}
                 {{ ui.social_icon(about.social.linkedin, "LinkedIn", ui.icon_linkedin("w-5 h-5"), "social-linkedin") }}
                 {% endif %}
+                {% if about.social.medium %}
+                {{ ui.social_icon(about.social.medium, "Medium", ui.icon_medium("w-5 h-5"), "social-medium") }}
+                {% endif %}
                 {% if about.rss %}
                 {{ ui.social_icon(about.rss, "RSS", ui.icon_rss("w-5 h-5")) }}
                 {% endif %}
