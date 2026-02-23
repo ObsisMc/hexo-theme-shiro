@@ -7,6 +7,7 @@
 {% set alias_name = about.alias or "" %}
 {% set avatar = about.avatar or theme.site.favicon or "/favicon.svg" %}
 {% set slogan_font = about.slogan_font or "yuji-boku" %}
+{% set contact = theme.contact_form or {} %}
 
 <article class="content-article about-simple">
     <section class="section-shell">
@@ -38,6 +39,58 @@
                 {{ ui.social_icon(about.rss, "RSS", ui.icon_rss("w-5 h-5")) }}
                 {% endif %}
             </div>
+
+            {% if contact.enabled and contact.action %}
+            <section class="mt-12 mx-auto max-w-2xl text-left">
+                <h2 class="section-title text-center">Contact Me</h2>
+                <p class="mt-3 text-sm text-slate-500 text-center">
+                    Send a message and I will get back to you by email.
+                </p>
+
+                <form class="mt-6 space-y-4" action="{{ contact.action }}" method="{{ contact.method or 'POST' }}">
+                    {% if contact.subject %}
+                    <input type="hidden" name="_subject" value="{{ contact.subject }}">
+                    {% endif %}
+                    <input type="hidden" name="_next" id="contact-next" value="">
+                    {% if contact.honeypot %}
+                    <input type="text" name="{{ contact.honeypot }}" tabindex="-1" autocomplete="off" class="hidden">
+                    {% endif %}
+                    <input type="hidden" name="_autoresponse" value="Thanks! I received your message and will reply soon.">
+                    <input type="hidden" name="_captcha" value="true">
+                    <input type="hidden" name="_template" value="table">
+
+                    <div>
+                        <label for="contact-name" class="block text-sm text-slate-600 mb-1">Name</label>
+                        <input id="contact-name" name="name" type="text" required
+                               class="w-full rounded-lg border border-slate-300 bg-white/90 px-3 py-2 text-slate-800 outline-none focus:ring-2 focus:ring-slate-300">
+                    </div>
+
+                    <div>
+                        <label for="contact-email" class="block text-sm text-slate-600 mb-1">Email</label>
+                        <input id="contact-email" name="email" type="email" required
+                               class="w-full rounded-lg border border-slate-300 bg-white/90 px-3 py-2 text-slate-800 outline-none focus:ring-2 focus:ring-slate-300">
+                    </div>
+
+                    <div>
+                        <label for="contact-message" class="block text-sm text-slate-600 mb-1">Message</label>
+                        <textarea id="contact-message" name="message" rows="6" required
+                                  class="w-full rounded-lg border border-slate-300 bg-white/90 px-3 py-2 text-slate-800 outline-none focus:ring-2 focus:ring-slate-300"></textarea>
+                    </div>
+
+                    <div class="pt-1 text-center">
+                        <button type="submit" class="btn-ink">Send Message</button>
+                    </div>
+                </form>
+                <script>
+                    (function() {
+                        var nextInput = document.getElementById('contact-next');
+                        if (!nextInput || nextInput.value) return;
+                        var prev = document.referrer;
+                        nextInput.value = prev || window.location.href;
+                    })();
+                </script>
+            </section>
+            {% endif %}
         </div>
     </section>
 </article>

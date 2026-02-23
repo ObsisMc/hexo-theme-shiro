@@ -22,7 +22,7 @@ about:
   tagline: "Systems, Data, Code, and Ideas"
   slogan_font: yuji-boku # yuji-boku or yuji-syuku
   social:
-      email: ""
+      email: "r9644360@gmail.com"
       github: "https://github.com/ObsisMc"
       linkedin: "https://www.linkedin.com/in/ruihao-zhang/"
       medium: "https://medium.com/@r9644360"
@@ -44,6 +44,16 @@ analytics:
   google:
     enabled: false
     id: ""
+
+# Contact form (for static form endpoints like Formspree)
+contact_form:
+  enabled: false
+  # Example: https://formspree.io/f/xxxxabcd
+  action: ""
+  method: ""
+  subject: ""
+  # Honeypot field name for anti-spam
+  honeypot: ""
 
 # Comment systems
 comments:
