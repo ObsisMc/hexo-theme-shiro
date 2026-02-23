@@ -41,13 +41,16 @@
             </div>
 
             {% if contact.enabled and contact.action %}
-            <section class="mt-12 mx-auto max-w-2xl text-left">
-                <h2 class="section-title text-center">Contact Me</h2>
-                <p class="mt-3 text-sm text-slate-500 text-center">
-                    Send a message and I will get back to you by email.
-                </p>
+            <section class="about-contact-section mt-20 mx-auto max-w-xl text-left">
+                <div class="paper about-contact-card rounded-[28px] border-slate-200/80 bg-white/85 px-7 py-10 sm:px-9 sm:py-11">
+                    <h2 class="section-title text-center">Contact Me</h2>
+                    <p class="mt-2 text-sm text-slate-500 text-center">
+                        Send a message and I will get back to you by email.
+                    </p>
 
-                <form class="mt-6 space-y-4" action="{{ contact.action }}" method="{{ contact.method or 'POST' }}">
+                    {{ ui.divider("my-6") }}
+
+                    <form class="about-contact-form mt-2 space-y-4" action="{{ contact.action }}" method="{{ contact.method or 'POST' }}">
                     {% if contact.subject %}
                     <input type="hidden" name="_subject" value="{{ contact.subject }}">
                     {% endif %}
@@ -62,25 +65,26 @@
                     <div>
                         <label for="contact-name" class="block text-sm text-slate-600 mb-1">Name</label>
                         <input id="contact-name" name="name" type="text" required
-                               class="w-full rounded-lg border border-slate-300 bg-white/90 px-3 py-2 text-slate-800 outline-none focus:ring-2 focus:ring-slate-300">
+                               class="about-contact-input focus-elegant w-full rounded-xl border border-slate-200 bg-white/70 px-3 py-2.5 text-slate-800 outline-none">
                     </div>
 
                     <div>
                         <label for="contact-email" class="block text-sm text-slate-600 mb-1">Email</label>
                         <input id="contact-email" name="email" type="email" required
-                               class="w-full rounded-lg border border-slate-300 bg-white/90 px-3 py-2 text-slate-800 outline-none focus:ring-2 focus:ring-slate-300">
+                               class="about-contact-input focus-elegant w-full rounded-xl border border-slate-200 bg-white/70 px-3 py-2.5 text-slate-800 outline-none">
                     </div>
 
                     <div>
                         <label for="contact-message" class="block text-sm text-slate-600 mb-1">Message</label>
-                        <textarea id="contact-message" name="message" rows="6" required
-                                  class="w-full rounded-lg border border-slate-300 bg-white/90 px-3 py-2 text-slate-800 outline-none focus:ring-2 focus:ring-slate-300"></textarea>
+                        <textarea id="contact-message" name="message" rows="5" required
+                                  class="about-contact-textarea w-full rounded-xl border border-slate-200 bg-white/70 px-3 py-2.5 text-slate-800 outline-none transition-colors"></textarea>
                     </div>
 
-                    <div class="pt-1 text-center">
+                    <div class="pt-2 text-center">
                         <button type="submit" class="btn-ink">Send Message</button>
                     </div>
-                </form>
+                    </form>
+                </div>
                 <script>
                     (function() {
                         var nextInput = document.getElementById('contact-next');

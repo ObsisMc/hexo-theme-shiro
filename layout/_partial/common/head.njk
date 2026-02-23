@@ -376,6 +376,9 @@
             gap: 1rem;
             flex-wrap: wrap;
         }
+        .about-simple .about-contact-section {
+            margin-top: 5.5rem !important;
+        }
         .about-simple .social-icon {
             width: 28px;
             height: 28px;
@@ -395,6 +398,30 @@
         }
         .about-simple .social-medium:hover {
             color: #000000;
+        }
+        .about-simple .about-contact-card {
+            border-radius: 30px;
+            padding-top: 1.5rem;
+            padding-bottom: 2.1rem;
+        }
+        .about-simple .about-contact-form {
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+        .about-simple .about-contact-input,
+        .about-simple .about-contact-textarea {
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .about-simple .about-contact-textarea:focus,
+        .about-simple .about-contact-textarea:focus-visible {
+            border-color: rgba(15, 23, 42, 0.7) !important;
+        }
+        @media (max-width: 640px) {
+            .about-simple .about-contact-form {
+                padding-left: 0.7rem;
+                padding-right: 0.7rem;
+            }
         }
     </style>
     {% endif %}
