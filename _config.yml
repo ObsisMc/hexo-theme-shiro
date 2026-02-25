@@ -17,17 +17,17 @@ menu:
 about:
   # Replace with your own avatar image placed in themes/shiro/source/images or site source/images
   avatar: /favicon.svg
-  name: " 张睿豪"
-  alias: "Ruihao (Ray) Zhang"
-  tagline: "Systems, Data, Code, and Ideas"
+  name:
+  alias:
+  tagline:
   slogan_font: yuji-boku # yuji-boku or yuji-syuku
   social:
-      email: "r9644360@gmail.com"
-      github: "https://github.com/ObsisMc"
-      linkedin: "https://www.linkedin.com/in/ruihao-zhang/"
-      medium: "https://medium.com/@r9644360"
-      zhihu: "https://www.zhihu.com/people/0000-26-60"
-      substack: "https://substack.com/@rayzhang675112"
+      email:
+      github:
+      linkedin:
+      medium:
+      zhihu:
+      substack:
 
 site:
   favicon: /favicon.svg
@@ -38,7 +38,7 @@ site:
     path: /atom.xml
   github:
     enabled: true
-    url: https://github.com/ObsisMc
+    url:
 
 # Analytics
 analytics:
