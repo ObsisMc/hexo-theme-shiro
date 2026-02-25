@@ -35,6 +35,12 @@
                 {% if about.social.medium %}
                 {{ ui.social_icon(about.social.medium, "Medium", ui.icon_medium("w-5 h-5"), "social-medium") }}
                 {% endif %}
+                {% if about.social.substack %}
+                {{ ui.social_icon(about.social.substack, "Substack", ui.icon_substack("w-4 h-4"), "social-substack") }}
+                {% endif %}
+                {% if about.social.zhihu %}
+                {{ ui.social_icon(about.social.zhihu, "Zhihu", ui.icon_zhihu("w-5 h-5"), "social-zhihu") }}
+                {% endif %}
                 {% if about.rss %}
                 {{ ui.social_icon(about.rss, "RSS", ui.icon_rss("w-5 h-5")) }}
                 {% endif %}
