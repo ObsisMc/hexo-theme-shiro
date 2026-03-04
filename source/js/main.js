@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', () => {
+﻿document.addEventListener('DOMContentLoaded', () => {
     // Menu Logic
     const btn = document.getElementById('menuBtn');
     const panel = document.getElementById('mobileMenu');
@@ -90,6 +90,8 @@ document.addEventListener('DOMContentLoaded', () => {
         tocBlocks.forEach((toc) => {
             const toggle = toc.querySelector('.post-toc-toggle');
             const body = toc.querySelector('.post-toc-body');
+            const resizeLeftHandle = toc.querySelector('.post-toc-resize-handle--left');
+            const resizeBottomHandle = toc.querySelector('.post-toc-resize-handle--bottom');
             if (!toggle || !body) return;
 
             const setPinned = (pinned) => {
@@ -117,6 +119,58 @@ document.addEventListener('DOMContentLoaded', () => {
                     setCollapsed(false);
                 }
             });
+
+            const getSizeBounds = () => ({
+                minWidth: 200,
+                maxWidth: Math.max(200, Math.min(560, window.innerWidth - 40)),
+                minHeight: 192,
+                maxHeight: Math.max(192, Math.floor(window.innerHeight * 0.75))
+            });
+
+            const applyBounds = (value, min, max) => Math.min(Math.max(value, min), max);
+
+            const beginResize = (event, axis) => {
+                if (toc.dataset.pinned !== 'true' || toc.dataset.collapsed !== 'false') return;
+                if (!(event.target instanceof Element)) return;
+                event.preventDefault();
+
+                const startX = event.clientX;
+                const startY = event.clientY;
+                const startWidth = toc.getBoundingClientRect().width;
+                const startHeight = toc.getBoundingClientRect().height;
+
+                const onPointerMove = (moveEvent) => {
+                    const bounds = getSizeBounds();
+
+                    if (axis === 'width') {
+                        const width = applyBounds(startWidth - (moveEvent.clientX - startX), bounds.minWidth, bounds.maxWidth);
+                        toc.style.width = `${width}px`;
+                    }
+
+                    if (axis === 'height') {
+                        const height = applyBounds(startHeight + (moveEvent.clientY - startY), bounds.minHeight, bounds.maxHeight);
+                        toc.style.height = `${height}px`;
+                    }
+                };
+
+                const onPointerUp = () => {
+                    document.removeEventListener('pointermove', onPointerMove);
+                    document.removeEventListener('pointerup', onPointerUp);
+                    document.body.style.userSelect = '';
+                };
+
+                document.body.style.userSelect = 'none';
+                document.addEventListener('pointermove', onPointerMove);
+                document.addEventListener('pointerup', onPointerUp, { once: true });
+            };
+
+            if (resizeLeftHandle) {
+                resizeLeftHandle.addEventListener('pointerdown', (event) => beginResize(event, 'width'));
+            }
+
+            if (resizeBottomHandle) {
+                resizeBottomHandle.addEventListener('pointerdown', (event) => beginResize(event, 'height'));
+            }
         });
 
         const tocLinks = Array.from(document.querySelectorAll('.post-toc .toc-link'));
@@ -239,3 +293,4 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+

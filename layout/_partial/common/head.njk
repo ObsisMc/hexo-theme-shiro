@@ -1,7 +1,7 @@
-<head>
+﻿<head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{% if is_home() %}{{ config.title | default("白夜書簡", true) }}{% elif is_post() %}{{ page.title }} | {{ config.title | default("白夜書簡", true) }}{% else %}{{ page.title }} | {{ config.title | default("白夜書簡", true) }}{% endif %}</title>
+    <title>{% if is_home() %}{{ config.title | default("鐧藉鏇哥啊", true) }}{% elif is_post() %}{{ page.title }} | {{ config.title | default("鐧藉鏇哥啊", true) }}{% else %}{{ page.title }} | {{ config.title | default("鐧藉鏇哥啊", true) }}{% endif %}</title>
 
     <!-- Favicon -->
     {% if theme.site.favicon %}
@@ -139,7 +139,7 @@
             border: 1px solid rgba(148, 163, 184, 0.22);
             background: linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(252, 252, 253, 0.92));
             padding: 1rem 1.9rem 1rem 1.8rem;
-            min-width: 240px;
+            min-width: 200px;
             font-size: 0.875rem;
             line-height: 1.5;
             color: var(--color-slate-600);
@@ -148,6 +148,22 @@
             position: relative;
             transition: clip-path 0.24s ease;
             --toc-collapsed-width: 2.9rem;
+        }
+        .post-toc[data-collapsed="false"][data-pinned="true"] {
+            width: clamp(220px, 18vw, 320px);
+            height: min(55vh, 26rem);
+            min-width: 200px;
+            max-width: min(70vw, 560px);
+            min-height: 12rem;
+            max-height: 75vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        .post-toc[data-collapsed="false"][data-pinned="true"] .post-toc-body {
+            flex: 1;
+            min-height: 0;
+            max-height: none;
         }
         .post-toc[data-collapsed="true"] .post-toc-body {
             display: none;
@@ -264,11 +280,36 @@
             position: relative;
             z-index: 1;
         }
+        .post-toc-resize-handle {
+            position: absolute;
+            display: none;
+            z-index: 3;
+        }
+        .post-toc[data-collapsed="false"][data-pinned="true"] .post-toc-resize-handle {
+            display: block;
+        }
+        .post-toc-resize-handle--left {
+            left: 0;
+            top: 1rem;
+            bottom: 1rem;
+            width: 10px;
+            cursor: ew-resize;
+            transform: translateX(-40%);
+        }
+        .post-toc-resize-handle--bottom {
+            left: 1rem;
+            right: 1rem;
+            bottom: 0;
+            height: 10px;
+            cursor: ns-resize;
+            transform: translateY(40%);
+        }
         .post-toc-float {
             position: fixed;
             top: 6.5rem;
             right: 1.4rem;
-            width: 240px;
+            width: max-content;
+            max-width: calc(100vw - 2rem);
             max-height: none;
             overflow: visible;
             z-index: 30;
@@ -436,3 +477,4 @@
     <!-- Analytics -->
     {% include "../analytics/google.njk" %}
 </head>
+
