@@ -1,6 +1,8 @@
-document.addEventListener('DOMContentLoaded', () => {
+﻿document.addEventListener('DOMContentLoaded', () => {
     const containers = document.querySelectorAll('.prose-shiro');
     if (!containers.length || typeof window.lightGallery !== 'function') return;
+    const zoomPlugin = window.lgZoom || window.LgZoom || null;
+    let activeLgInstance = null;
 
     const escapeHtml = (value) => value
         .replace(/&/g, '&amp;')
@@ -45,9 +47,44 @@ document.addEventListener('DOMContentLoaded', () => {
             ensureLink(container, img);
         });
 
-        window.lightGallery(container, {
+        const instance = window.lightGallery(container, {
             selector: 'a[data-lg-item]',
-            download: false
+            download: false,
+            plugins: zoomPlugin ? [zoomPlugin] : [],
+            zoom: Boolean(zoomPlugin),
+            actualSize: false,
+            showZoomInOutIcons: Boolean(zoomPlugin)
+        });
+
+        container.addEventListener('lgAfterOpen', (event) => {
+            activeLgInstance = event.detail?.instance || instance;
+        });
+
+        container.addEventListener('lgAfterClose', () => {
+            if (activeLgInstance === instance) activeLgInstance = null;
         });
     });
+
+    document.addEventListener('wheel', (event) => {
+        if (!activeLgInstance) return;
+        const target = event.target;
+        if (!(target instanceof Element)) return;
+
+        const inGallery = target.closest('.lg-outer');
+        if (!inGallery) return;
+
+        event.preventDefault();
+        const zoom = activeLgInstance.plugins && activeLgInstance.plugins.zoom;
+
+        if (zoom && typeof zoom.zoomIn === 'function' && typeof zoom.zoomOut === 'function') {
+            if (event.deltaY < 0) zoom.zoomIn();
+            else if (event.deltaY > 0) zoom.zoomOut();
+            return;
+        }
+
+        const selector = event.deltaY < 0 ? '.lg-zoom-in' : '.lg-zoom-out';
+        const button = document.querySelector(selector);
+        if (button) button.dispatchEvent(new MouseEvent('click', { bubbles: true }));
+    }, { passive: false });
 });
+
