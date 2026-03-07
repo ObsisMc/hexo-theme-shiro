@@ -18,7 +18,7 @@
     {% if theme.excerpt.fallback.enabled or post.excerpt %}
     <div class="mt-6 text-center">
         <a href="{{ url_for(post.path) }}"
-            class="focus-elegant btn-ink">
+            class="focus-elegant btn-ink" data-i18n="index.read_more">
             {{ __('index.read_more') }}
         </a>
     </div>

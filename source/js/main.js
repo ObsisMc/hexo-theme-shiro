@@ -292,5 +292,75 @@
             }
         });
     }
+
+    // Language switcher
+    const i18n = {
+        en: {
+            'menu.Home': 'Home',
+            'menu.Archives': 'Archives',
+            'menu.Categories': 'Categories',
+            'menu.Tags': 'Tags',
+            'menu.About': 'About',
+            'index.read_more': 'Read More',
+        },
+        zh: {
+            'menu.Home': '首页',
+            'menu.Archives': '归档',
+            'menu.Categories': '分类',
+            'menu.Tags': '标签',
+            'menu.About': '关于',
+            'index.read_more': '阅读全文',
+        },
+    };
+    const langLabels = { en: 'EN', zh: '中文' };
+
+    const applyLang = (lang) => {
+        const dict = i18n[lang];
+        document.querySelectorAll('[data-i18n]').forEach((el) => {
+            const key = el.getAttribute('data-i18n');
+            if (dict[key] !== undefined) el.textContent = dict[key];
+        });
+        const label = document.getElementById('langToggleLabel');
+        if (label) label.textContent = langLabels[lang] || lang;
+        document.querySelectorAll('.lang-option').forEach((opt) => {
+            opt.dataset.active = opt.dataset.lang === lang ? 'true' : 'false';
+        });
+    };
+
+    const savedLang = localStorage.getItem('preferred-lang') || 'en';
+    applyLang(savedLang);
+
+    const switcher = document.getElementById('langSwitcher');
+    const langBtn = document.getElementById('langToggleBtn');
+
+    const setDropdownOpen = (open) => {
+        if (!switcher || !langBtn) return;
+        switcher.dataset.open = open ? 'true' : 'false';
+        langBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    };
+
+    if (langBtn) {
+        langBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            setDropdownOpen(switcher.dataset.open !== 'true');
+        });
+    }
+
+    document.querySelectorAll('.lang-option').forEach((opt) => {
+        opt.addEventListener('click', () => {
+            const lang = opt.dataset.lang;
+            localStorage.setItem('preferred-lang', lang);
+            applyLang(lang);
+            setDropdownOpen(false);
+        });
+    });
+
+    document.addEventListener('click', (e) => {
+        if (switcher && !switcher.contains(e.target)) setDropdownOpen(false);
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') setDropdownOpen(false);
+    });
 });
 

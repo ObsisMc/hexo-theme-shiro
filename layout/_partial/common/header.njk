@@ -57,7 +57,8 @@
         <ul class="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-base text-slate-700 px-4">
             {% for item in theme.menu %}
             <li><a class="focus-elegant rounded-md px-2 py-1 hover:text-slate-900 transition-colors"
-                    href="{{ url_for(item.url) }}" {% if item.target %}target="{{ item.target }}"{% endif %}>{{ item.name }}</a></li>
+                    href="{{ url_for(item.url) }}" {% if item.target %}target="{{ item.target }}"{% endif %}
+                    data-i18n="menu.{{ item.name }}">{{ item.name }}</a></li>
             {% if not loop.last %}
             <li class="text-slate-300 select-none" aria-hidden="true">/</li>
             {% endif %}
@@ -71,7 +72,8 @@
             class="mx-auto max-w-sm max-h-menu overflow-y-auto rounded-2xl border border-slate-200 bg-white/70 backdrop-blur-xs shadow-xs">
             {% for item in theme.menu %}
             <li><a class="focus-elegant block px-6 py-3 text-center text-slate-800 hover:bg-slate-50/80 transition-colors"
-                    href="{{ url_for(item.url) }}" {% if item.target %}target="{{ item.target }}"{% endif %}>{{ item.name }}</a></li>
+                    href="{{ url_for(item.url) }}" {% if item.target %}target="{{ item.target }}"{% endif %}
+                    data-i18n="menu.{{ item.name }}">{{ item.name }}</a></li>
             {% if not loop.last %}
             <li class="h-px bg-slate-200/70" aria-hidden="true"></li>
             {% endif %}

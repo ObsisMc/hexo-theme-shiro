@@ -23,6 +23,17 @@
             {% include "_partial/common/footer.njk" %}
         </div>
 
+        <div id="langSwitcher" class="lang-switcher" data-open="false">
+            <button id="langToggleBtn" class="lang-toggle-btn" type="button" aria-label="Switch language" aria-haspopup="listbox" aria-expanded="false">
+                <span id="langToggleLabel">EN</span>
+                <span class="lang-toggle-chevron" aria-hidden="true"></span>
+            </button>
+            <div class="lang-dropdown" role="listbox" aria-label="Select language">
+                <button class="lang-option" data-lang="en" data-active="true" role="option">English</button>
+                <button class="lang-option" data-lang="zh" data-active="false" role="option">中文</button>
+            </div>
+        </div>
+
         <button id="toTopBtn" class="to-top-btn" type="button" aria-label="回到顶部">
             <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
                 <path d="M12 5l-6 6 1.4 1.4L12 7.8l4.6 4.6L18 11zM12 11l-6 6 1.4 1.4L12 13.8l4.6 4.6L18 17z"/>
